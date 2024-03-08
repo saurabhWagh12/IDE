@@ -23,12 +23,10 @@ def run_python():
 def run_java():
     code = editor.get('1.0', END)
     if filepath == '':
-        # Save the Java code to a file (e.g., code.java)
         with open('Main.java', 'w') as java_file:
             java_file.write(code)
         file_name = 'Main.java'
     else:
-        # Save the Java code to the existing file
         with open(filepath, 'w') as java_file:
             java_file.write(code)
         file_name = os.path.basename(filepath)
@@ -82,19 +80,19 @@ menuBar.add_cascade(label='Run', menu=runMenu)
 compiler.config(menu=menuBar)
 
 editor = Text(compiler)
-editor.grid(row=0, column=0, sticky="nsew")  # Use grid and set row/column weights
-compiler.grid_rowconfigure(0, weight=1)       # Make row expandable
-compiler.grid_columnconfigure(0, weight=1)    # Make column expandable
+editor.grid(row=0, column=0, sticky="nsew")  
+compiler.grid_rowconfigure(0, weight=1)       
+compiler.grid_columnconfigure(0, weight=1)    
 
 def on_tab_pressed(event):
-    editor.insert(INSERT, "    ")  # Insert four spaces when the Tab key is pressed
+    editor.insert(INSERT, "    ")  
     return 'break'  # Prevents the default behavior of the Tab key
 
 # Tab button Updation
 editor.bind("<Tab>", on_tab_pressed)
 
 codeOutput = Text(compiler, height=10)
-codeOutput.grid(row=1, column=0, sticky="nsew")  # Use grid for codeOutput as well
-compiler.grid_rowconfigure(1, weight=1)          # Make row expandable
+codeOutput.grid(row=1, column=0, sticky="nsew")  
+compiler.grid_rowconfigure(1, weight=1)          
 
 compiler.mainloop()
